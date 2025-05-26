@@ -66,6 +66,7 @@ export default function NoteReviewCard({id} :{ id: number}) {
   const note: Note = React.useContext(NoteContext);
   const [newComment,setNewComment] = React.useState(["true","hj","jhk","gjg"]);
 
+  const date = new Date();
   // React.useEffect(() => {
   //   note.setComment(`comment,${note.components.toString()}`);
   //   const newCom = note.comment.split(",");
@@ -88,7 +89,8 @@ export default function NoteReviewCard({id} :{ id: number}) {
           </IconButton>
         }
         title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        // subheader="September 14, 2016"
+        subheader={`${date.getFullYear()} / ${date.getMonth()} / ${date.getDay()}`}
       />
       {/* <CardMedia
         component="img"
