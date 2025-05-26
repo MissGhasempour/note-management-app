@@ -47,14 +47,14 @@ export default function Notes({ id }: { id: number }) {
 
   return (
     <div>
-      <NoteReviewCard id={id}/>
+      <NoteReviewCard/>
       <br />
       <Button color="secondary" onClick={editNote}>
         Edit
       </Button>
       <Button variant="outlined" color="error" onClick={deleteNote}>
         Delete
-      </Button>
+      </Button><br/><br/>
     </div>
   );
 }

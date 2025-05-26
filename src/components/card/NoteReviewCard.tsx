@@ -28,8 +28,8 @@ interface Note {
   comment: string;
   setDisplay: Function;
   setcomponents: Function;
-  newComment:string[];
-  setComment:Function;
+  newComment: string[];
+  setComment: Function;
 }
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -56,7 +56,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   ],
 }));
 
-export default function NoteReviewCard({id} :{ id: number}) {
+export default function NoteReviewCard() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -64,16 +64,16 @@ export default function NoteReviewCard({id} :{ id: number}) {
   };
 
   const note: Note = React.useContext(NoteContext);
-  const [newComment,setNewComment] = React.useState(["true","hj","jhk","gjg"]);
+  const [newComment, setNewComment] = React.useState("true");
 
   const date = new Date();
-  // React.useEffect(() => {
-  //   note.setComment(`comment,${note.components.toString()}`);
-  //   const newCom = note.comment.split(",");
-  //   setNewComment(newCom);
 
-  // }, [note.components]);
-
+  React.useEffect(
+    React.useCallback(() => {
+     setNewComment(note.comment);
+    }, []),
+    []
+  );
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -100,40 +100,13 @@ export default function NoteReviewCard({id} :{ id: number}) {
       /> */}
 
       <CardContent>
-        {newComment[1] == "1" ? (
-          <Typography
+         <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {newComment[1]}
+            {newComment}
           </Typography>
-        ) : newComment[2] == "2" ? (
-          <Typography
-            variant="body2"
-            sx={{ color: "text.secondary" }}
-            id="comment"
-          >
-            {newComment[2]}
-          </Typography>
-        ) : newComment[3] == "3" ? (
-          <Typography
-            variant="body2"
-            sx={{ color: "text.secondary" }}
-            id="comment"
-          >
-            {newComment[3]}
-          </Typography>
-        ) : (
-          <Typography
-            variant="body2"
-            sx={{ color: "text.secondary" }}
-            id="comment"
-          >
-            {note.comment}
-          </Typography>
-        )}
-
         <br />
         <br />
       </CardContent>
