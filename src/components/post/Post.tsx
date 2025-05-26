@@ -1,6 +1,6 @@
 import { TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import Notes from "../notes/Notes";
 import manageData from "../../helper/manageData";
 //import Test from "../test/test";
@@ -11,7 +11,6 @@ export const NoteContext = createContext({});
 
 export default function Post() {
   const [comment, setComment] = useState("default value");
-  const [newComment,setNewComment] = useState([""]);
   const [display, setDisplay] = useState("");
   const [components, setcomponents] = useState([0]);
   const [componentName, setComponentName] = useState([
@@ -30,12 +29,6 @@ export default function Post() {
     }
     //console.log("name" + componentName, "component : " + components);
   }
-  useEffect(() => {
-    setComment(`comment,${components.toString()}`);
-    const newCom = comment.split(",");
-    setNewComment(newCom);
-    console.log(newComment);
-  }, [components]);
 
   const editNote = () => {
     setDisplay("true");
@@ -60,6 +53,9 @@ export default function Post() {
         />
         <br />
         <br />
+        <Button color="secondary" onClick={editNote}>
+          Edit
+        </Button>{" "}
         <Button
           variant="contained"
           endIcon={<SendIcon />}
@@ -69,9 +65,6 @@ export default function Post() {
           }}
         >
           Send
-        </Button>{" "}
-        <Button color="secondary" onClick={editNote}>
-          Edit
         </Button>
         <br />
       </form>
@@ -84,7 +77,7 @@ export default function Post() {
             setDisplay: setDisplay,
             components: components,
             setcomponents: setcomponents,
-            newComment:newComment
+            setComment: setComment,
           }}
         >
           {/* <Notes /> */}

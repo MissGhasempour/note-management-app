@@ -41,7 +41,7 @@ export default function Notes({ id }: { id: number }) {
     });
 
     note.setcomponents(filter);
-    note.setDisplay("");
+
     //console.log(filter, findCard[0]);
   };
 

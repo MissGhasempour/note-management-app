@@ -29,6 +29,7 @@ interface Note {
   setDisplay: Function;
   setcomponents: Function;
   newComment:string[];
+  setComment:Function;
 }
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
@@ -63,8 +64,15 @@ export default function NoteReviewCard({id} :{ id: number}) {
   };
 
   const note: Note = React.useContext(NoteContext);
+  const [newComment,setNewComment] = React.useState(["true","hj","jhk","gjg"]);
 
-  console.log(note.newComment);
+  // React.useEffect(() => {
+  //   note.setComment(`comment,${note.components.toString()}`);
+  //   const newCom = note.comment.split(",");
+  //   setNewComment(newCom);
+
+  // }, [note.components]);
+
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -90,29 +98,29 @@ export default function NoteReviewCard({id} :{ id: number}) {
       /> */}
 
       <CardContent>
-        {note.newComment[1] == "1" ? (
+        {newComment[1] == "1" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {note.newComment[1]}
+            {newComment[1]}
           </Typography>
-        ) : note.newComment[2] == "2" ? (
+        ) : newComment[2] == "2" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {note.newComment[2]}
+            {newComment[2]}
           </Typography>
-        ) : note.newComment[3] == "3" ? (
+        ) : newComment[3] == "3" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {note.comment[3]}
+            {newComment[3]}
           </Typography>
         ) : (
           <Typography
@@ -120,7 +128,7 @@ export default function NoteReviewCard({id} :{ id: number}) {
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {note.newComment}
+            {note.comment}
           </Typography>
         )}
 
