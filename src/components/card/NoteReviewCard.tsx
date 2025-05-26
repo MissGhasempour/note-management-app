@@ -23,6 +23,13 @@ interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
+interface Note {
+  components: [];
+  comment: string;
+  setDisplay: Function;
+  setcomponents: Function;
+  newComment:string[];
+}
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   //console.log(expand);
@@ -48,14 +55,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   ],
 }));
 
-export default function NoteReviewCard({id}:{id:number}) {
+export default function NoteReviewCard({id} :{ id: number}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const note = React.useContext(NoteContext);
+  const note: Note = React.useContext(NoteContext);
+
+  console.log(note.newComment);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -81,32 +90,38 @@ export default function NoteReviewCard({id}:{id:number}) {
       /> */}
 
       <CardContent>
-        {id == 1 ? (
+        {note.newComment[1] == "1" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {"1" + note.comment}
+            {note.newComment[1]}
           </Typography>
-        ) : id == 2 ? (
+        ) : note.newComment[2] == "2" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {"2" + note.comment}
+            {note.newComment[2]}
           </Typography>
-        ) : id == 3 ? (
+        ) : note.newComment[3] == "3" ? (
           <Typography
             variant="body2"
             sx={{ color: "text.secondary" }}
             id="comment"
           >
-            {"3" + note.comment}
+            {note.comment[3]}
           </Typography>
         ) : (
-          <div></div>
+          <Typography
+            variant="body2"
+            sx={{ color: "text.secondary" }}
+            id="comment"
+          >
+            {note.newComment}
+          </Typography>
         )}
 
         <br />

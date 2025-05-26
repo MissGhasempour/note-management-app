@@ -1,20 +1,17 @@
 import { TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { createContext, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import Notes from "../notes/Notes";
 import manageData from "../../helper/manageData";
 //import Test from "../test/test";
 // import NoteReviewCard from "../card/NoteReviewCard";
 //import NoteReviewCard from "../card/NoteReviewCard";
 
-// interface Context {
-//   comment:string;
-//   display:string;
-
-// }
 export const NoteContext = createContext({});
+
 export default function Post() {
-  const [comment, setComment] = useState(["default value"]);
+  const [comment, setComment] = useState("default value");
+  const [newComment,setNewComment] = useState([""]);
   const [display, setDisplay] = useState("");
   const [components, setcomponents] = useState([0]);
   const [componentName, setComponentName] = useState([
@@ -28,13 +25,21 @@ export default function Post() {
     if (componentName.length > 0) {
       setcomponents([...components, componentName[0]]);
       componentName.splice(0, 1);
+
+      // console.log(comment[0]);
     }
-    console.log("name" + componentName, "component : " + components);
+    //console.log("name" + componentName, "component : " + components);
   }
+  useEffect(() => {
+    setComment(`comment,${components.toString()}`);
+    const newCom = comment.split(",");
+    setNewComment(newCom);
+    console.log(newComment);
+  }, [components]);
 
   const editNote = () => {
-    setDisplay("true")
-    setcomponents([...components])
+    setDisplay("true");
+    setcomponents([...components]);
   };
   return (
     <>
@@ -51,7 +56,7 @@ export default function Post() {
           rows={4}
           defaultValue="default value"
           variant="filled"
-          onChange={(e) => setComment([e.currentTarget.value])}
+          onChange={(e) => setComment(e.currentTarget.value)}
         />
         <br />
         <br />
@@ -79,12 +84,13 @@ export default function Post() {
             setDisplay: setDisplay,
             components: components,
             setcomponents: setcomponents,
+            newComment:newComment
           }}
         >
           {/* <Notes /> */}
           {components.map((item, id) => {
             if (!display) return;
-            // console.log(id);
+
             return <Notes key={item} id={id} />;
           })}
         </NoteContext.Provider>
