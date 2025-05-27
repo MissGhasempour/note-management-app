@@ -1,11 +1,9 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Container } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Notes from "../notes/Notes";
 import manageData from "../../helper/manageData";
 //import Test from "../test/test";
-// import NoteReviewCard from "../card/NoteReviewCard";
-//import NoteReviewCard from "../card/NoteReviewCard";
 
 export const NoteContext = createContext({});
 
@@ -29,6 +27,11 @@ export default function Post() {
     }
     //console.log("name" + componentName, "component : " + components);
   }
+
+  useEffect(() => {
+    components.splice(2, 2);
+    console.log(components);
+  });
 
   const editNote = () => {
     setDisplay("true");
@@ -80,7 +83,6 @@ export default function Post() {
             setComment: setComment,
           }}
         >
-          {/* <Notes /> */}
           {components.map((item, id) => {
             if (!display) return;
 
@@ -90,6 +92,32 @@ export default function Post() {
       ) : (
         <div></div>
       )}
+      <br />
+      <Container maxWidth="sm" sx={{ marginTop: "5vh" }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            components.filter((cardValue) => {
+              console.log(cardValue);
+              return cardValue < 5;
+            });
+          }}
+        >
+          previous
+        </Button>{" "}
+        <Button
+          variant="contained"
+          onClick={() => {
+            setcomponents([]);
+            const filter = components.filter((cardValue) => {
+              return cardValue < 5;
+            });
+            //console.log(filter);
+          }}
+        >
+          next
+        </Button>
+      </Container>
     </>
   );
 }

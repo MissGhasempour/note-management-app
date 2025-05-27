@@ -3,7 +3,7 @@ import { NoteContext } from "../post/Post";
 import NoteReviewCard from "../card/NoteReviewCard";
 import { Button } from "@mui/material";
 
-type Note = {
+interface Note{
   components: [];
   comment: string;
   setDisplay: Function;
